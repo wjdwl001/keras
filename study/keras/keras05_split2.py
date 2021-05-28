@@ -33,7 +33,8 @@ model.add(Dense(1))
 
 #3. 컴파일, 훈련
 model.compile(optimizer="adam", loss='mse')
-model.fit(x_train, y_train, epochs=1000)
+model.fit(x_train, y_train, epochs=1000,    
+         validation_data=(x_val,y_val))
 
 #4. 평가, 예측
 y_predict = model.predict([101,102,103])
