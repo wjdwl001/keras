@@ -1,4 +1,4 @@
-#다:다 함수형
+#다:다 함수형모델
 
 import numpy as np
 #1. 데이터
@@ -41,10 +41,9 @@ output1 = Dense(2)(dense2)
 modelF = Model(inputs = input1, outputs = output1)
 modelF.summary()
 
-'''
 #3. 컴파일 훈련
-model.compile(loss='mse',optimizer='adam',metrics=['acc'])
-model.fit(x_train,y_train, epochs=100, batch_size=1,
+modelF.compile(loss='mse',optimizer='adam',metrics=['acc'])
+modelF.fit(x_train,y_train, epochs=100, batch_size=1,
           verbose=1) 
 
 """
@@ -55,10 +54,10 @@ verbose = 3 :
 """
 
 #4. 평가 예측
-results = model.evaluate(x_test,y_test)
+results = modelF.evaluate(x_test,y_test)
 print("results : ",results)
 
-y_pred = model.predict(x_test)
+y_pred = modelF.predict(x_test)
 
 from sklearn.metrics import mean_squared_error
 def RMSE(y_test, y_predict) : 
@@ -69,4 +68,3 @@ print("mse : ", mean_squared_error(y_test, y_pred))
 from sklearn.metrics import r2_score
 R2 = r2_score(y_test,y_pred)
 print("R2 : ", R2)
-'''

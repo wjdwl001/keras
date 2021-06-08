@@ -28,26 +28,25 @@ x_train, x_test, y_train, y_test = train_test_split(
 from tensorflow.keras.models import Sequential, Model
 from tensorflow.keras.layers import Dense,Input
 
-model = Sequential()
-model.add(Dense(10,activation='relu', input_shape=(4,)))
-model.add(Dense(10))
-model.add(Dense(1))
+input1 = Input(shape=(4,))
+h1 = Dense(10)(input1)
+h2 = Dense(10)(h1)
+h3 = Dense(10)(h2)
+h4 = Dense(5)(h3)
+output1 = Dense(3, activation='softmax')(h4)
+model = Model(inputs=input1, outputs=output1)
 
 
-#3. 컴파일 훈련
-model.compile(loss='mse',optimizer='adam',metrics=['acc'])
+#3. 컴파일, 훈련
+model.compile(loss='sparse_categorical_crossentropy',optimizer='adam',metrics=['acc'])
 model.fit(x_train,y_train, epochs=100, batch_size=1,
           verbose=5, validation_split=0.1) 
 
 
-#4. 평가 예측
+#4. 평가, 예측
 results = model.evaluate(x_test,y_test)
 print("results : ",results) #loss, acc
 
 y_predict = model.predict(x_test)
 print()
-print(y_predict[:5])
-
-from sklearn.metrics import r2_score
-R2 = r2_score(y_test,y_predict)
-print("R2 : ", R2)
+print(y_predict[:5])  

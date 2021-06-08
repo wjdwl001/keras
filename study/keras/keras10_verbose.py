@@ -33,7 +33,14 @@ model.add(Dense(2))
 #3. 컴파일 훈련
 model.compile(loss='mse',optimizer='adam',metrics=['acc'])
 model.fit(x_train,y_train, epochs=100, batch_size=1,
-          verbose=0) #
+          verbose=1) 
+
+"""
+verbose = 0 : 안나옴
+verbose = 1 : 디폴트
+verbose = 2 : 프로그래스바 x
+verbose = 3 : 
+"""
 
 #4. 평가 예측
 results = model.evaluate(x_test,y_test)

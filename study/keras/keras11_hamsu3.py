@@ -2,9 +2,8 @@
 
 import numpy as np
 #1. 데이터
-x = np.array([range(100),range(301,401),range(1,101),
-              range(100),range(301,401) ])
-y = np.array([range(711,811), range(1,101)])
+x = np.array(range(100))
+y = np.array([range(711,811), range(1,101), range(200,300),range(301,401)])
 print(x.shape) #(5,100)
 print(y.shape) #(2,100)
 
@@ -21,25 +20,25 @@ print(y_train.shape) #(80,2)
 #2. 모델구성
 from tensorflow.keras.models import Sequential,Model
 from tensorflow.keras.layers import Dense,Input
-modelS = Sequential()
-modelS.add(Dense(3, input_shape=(5,)))
-modelS.add(Dense(4))
-modelS.add(Dense(2))
-modelS.summary()
+#modelS = Sequential()
+#modelS.add(Dense(3, input_shape=(5,)))
+#modelS.add(Dense(4))
+#modelS.add(Dense(2))
+#modelS.summary()
 
-input1 = Input(shape=(5,))
+input1 = Input(shape=(1,))
 dense1 = Dense(3)(input1) #상단 레이어의 이름
 dense1_1 = Dense(7)(dense1)
 dense2 = Dense(4)(dense1_1)
-output1 = Dense(2)(dense2)
+output1 = Dense(4)(dense2)
 
 modelF = Model(inputs = input1, outputs = output1)
 modelF.summary()
 
-'''
+
 #3. 컴파일 훈련
-model.compile(loss='mse',optimizer='adam',metrics=['acc'])
-model.fit(x_train,y_train, epochs=100, batch_size=1,
+modelF.compile(loss='mse',optimizer='adam',metrics=['acc'])
+modelF.fit(x_train,y_train, epochs=100, batch_size=1,
           verbose=1) 
 
 """
@@ -50,10 +49,10 @@ verbose = 3 :
 """
 
 #4. 평가 예측
-results = model.evaluate(x_test,y_test)
+results = modelF.evaluate(x_test,y_test)
 print("results : ",results)
 
-y_pred = model.predict(x_test)
+y_pred = modelF.predict(x_test)
 
 from sklearn.metrics import mean_squared_error
 def RMSE(y_test, y_predict) : 
@@ -64,4 +63,4 @@ print("mse : ", mean_squared_error(y_test, y_pred))
 from sklearn.metrics import r2_score
 R2 = r2_score(y_test,y_pred)
 print("R2 : ", R2)
-'''
+

@@ -48,6 +48,6 @@ print("RMSE : ", RMSE(y_test, y_pred))
 print("mse : ", mean_squared_error(y_test, y_pred))
 
 from sklearn.metrics import r2_score
-R2 = r2_score(y,y_pred)
+R2 = r2_score(y_test,y_pred)
 print("R2 : ", R2)
 
